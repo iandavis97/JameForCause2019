@@ -102,7 +102,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1799930407408981262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpForce: 12
+  sprite1: {fileID: 0}
+  sprite2: {fileID: 0}
+  isPlayer1: 0
+  isPlayer2: 0
 --- !u!61 &1799930407408981258
 BoxCollider2D:
   m_ObjectHideFlags: 0
