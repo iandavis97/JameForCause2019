@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 32188878}
   - component: {fileID: 32188877}
   - component: {fileID: 32188876}
+  - component: {fileID: 32188879}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -173,7 +174,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 14.22987
+  orthographic size: 14
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -197,12 +198,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 32188875}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5999999, z: -100}
+  m_LocalPosition: {x: 0, y: 8.5, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &32188879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32188875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e29fd236200d94db68c67ab1726647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interpVelocity: 0
+  minDistance: 0
+  followDistance: 0
+  target: {fileID: 666955107}
+  offset: {x: 0, y: 2, z: 0}
 --- !u!1 &554971285
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +319,7 @@ GameObject:
   - component: {fileID: 910946580}
   m_Layer: 8
   m_Name: Ground (1)
-  m_TagString: Ground
+  m_TagString: DarkObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -467,7 +485,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992852049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.56, y: 2.635934, z: -52.881516}
+  m_LocalPosition: {x: -10.28, y: 2.635934, z: -52.881516}
   m_LocalScale: {x: 10, y: 10, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -639,7 +657,7 @@ GameObject:
   - component: {fileID: 1441822503}
   m_Layer: 8
   m_Name: Ground
-  m_TagString: Ground
+  m_TagString: DarkObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -903,6 +921,11 @@ PrefabInstance:
     - target: {fileID: 1799930407408981259, guid: d2f4d4e724e757144a1c8b0a5f1a7680,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799930407408981259, guid: d2f4d4e724e757144a1c8b0a5f1a7680,
+        type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1799930407408981262, guid: d2f4d4e724e757144a1c8b0a5f1a7680,
