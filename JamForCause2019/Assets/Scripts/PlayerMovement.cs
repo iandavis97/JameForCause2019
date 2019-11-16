@@ -29,10 +29,11 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        isPlayer1 = true;
-        isPlayer2 = false;
         dead = false;
         jump = false;
+        isPlayer1 = !isPlayer1;
+        isPlayer2 = !isPlayer2;
+        ActuallySwitch();
         jumpCancel = false;
         gravScale = rb.gravityScale;
         Debug.Log("Test");
@@ -144,18 +145,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab)&&!noSwitch)
         {
-            if (spriteRenderer.sprite == sprite1) // if the spriteRenderer sprite = sprite1 then change to sprite2
-            {
-                spriteRenderer.sprite = sprite2;
-                isPlayer1 = false;
-                isPlayer2 = true;
-            }
-            else
-            {
-                spriteRenderer.sprite = sprite1; // otherwise change it back to sprite1
-                isPlayer2 = false;
-                isPlayer1 = true;
-            }
+            ActuallySwitch();
+        }
+    }
+
+    private void ActuallySwitch()
+    {
+        if (spriteRenderer.sprite == sprite1) // if the spriteRenderer sprite = sprite1 then change to sprite2
+        {
+            spriteRenderer.sprite = sprite2;
+            isPlayer1 = false;
+            isPlayer2 = true;
+        }
+        else
+        {
+            spriteRenderer.sprite = sprite1; // otherwise change it back to sprite1
+            isPlayer2 = false;
+            isPlayer1 = true;
         }
     }
 }
