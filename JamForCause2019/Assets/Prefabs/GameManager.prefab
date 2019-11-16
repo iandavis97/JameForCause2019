@@ -44,7 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 0}
-  objectSwapList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  objectSwapList: []
