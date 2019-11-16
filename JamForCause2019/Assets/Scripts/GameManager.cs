@@ -17,6 +17,12 @@ public class GameManager : MonoBehaviour
         {
             objectSwapList.Add(gj.transform.GetChild(i).gameObject);
         }
+        gj = GameObject.Find("level_dark");
+        indexcount = gj.transform.childCount;
+        for (int i = 0; i < indexcount; i++)
+        {
+            objectSwapList.Add(gj.transform.GetChild(i).gameObject);
+        }
         player = playerObject.GetComponent<PlayerMovement>();
     }
 
