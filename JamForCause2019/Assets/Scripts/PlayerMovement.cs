@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     public float jumpForce;
     private SpriteRenderer spriteRenderer;
+    public bool dead;//if player killed by enemy or obstacle
+    public Vector3 lastCheckpoint;//if player dies, should respwan at last activated checkpoint
 
     //setting up player switch
     public Sprite sprite1;
@@ -24,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         isPlayer1 = true;
         isPlayer2 = false;
+        dead = false;
     }
 
     private void HandleMovement(float horizontal)
@@ -51,12 +54,31 @@ public class PlayerMovement : MonoBehaviour
         }
         HandleMovement(horizontal);
         SwitchPlayers();
+        if (dead)
+        {
+            transform.position = lastCheckpoint;
+            dead = false;
+        }
     }
+    //checking collisions with different objects
     private void OnCollisionEnter2D(Collision2D col)
     {
+        //checking if on ground
         if (col.gameObject.tag == "Ground") // GameObject is a type, gameObject is the property
         {
             isGrounded = true;
+        }
+
+        //checking if colliding with enemy
+        if(col.gameObject.tag=="Enemy")
+        {
+            dead = true;
+        }
+
+        //checking if touched checkpoint
+        if (col.gameObject.tag == "Checkpoint")
+        {
+            lastCheckpoint = col.transform.position;//new respawn point
         }
     }
 
@@ -78,7 +100,5 @@ public class PlayerMovement : MonoBehaviour
                 isPlayer1 = true;
             }
         }
-
-
     }
 }
