@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4393713736498231472}
   - component: {fileID: 2448578798770586817}
   - component: {fileID: 3536817500572261613}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: darkwalls_1
   m_TagString: DarkObject
   m_Icon: {fileID: 0}
