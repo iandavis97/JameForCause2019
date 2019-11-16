@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //--PROPERTIES--
     public GameObject playerObject;
     private PlayerMovement player;//reference to script
     public List<GameObject> objectSwapList = new List<GameObject>();
+
+    //camera variables
+    public GameObject cam;
+    public Vector3 specificVector;
+    public float smoothSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +26,7 @@ public class GameManager : MonoBehaviour
         SwapObjects();
     }
 
+    //--METHODS--
     private void SwapObjects()
     {
         //going through list of objects that can be swapped
