@@ -134,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.tag == "NoSwitch")
             noSwitch = true;
     }
-    private void OnTriggerExit(Collider col)
+    private void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.tag == "NoSwitch")
             noSwitch = false;
