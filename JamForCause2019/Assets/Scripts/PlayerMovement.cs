@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public Sprite sprite2;
     public bool isPlayer1;
     public bool isPlayer2;
+    public bool noSwitch;//prevents switching
 
     // Start is called before the first frame update
     void Start()
@@ -75,9 +76,9 @@ public class PlayerMovement : MonoBehaviour
     private void JumpInput()
     {
         //checking for jump input
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)//player starts pressing the buton
+        if ((Input.GetKeyDown(KeyCode.Space) && isGrounded)||((Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)))//player starts pressing the buton
             jump = true;
-        if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.UpArrow) && !isGrounded)//player stops pressing the button
+        if ((Input.GetKeyUp(KeyCode.Space)&& !isGrounded)|| (Input.GetKeyUp(KeyCode.UpArrow) && !isGrounded))//player stops pressing the button
         {
             jumpCancel = true;
         }
@@ -126,10 +127,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //checking triggers
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "NoSwitch")
+            noSwitch = true;
+    }
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "NoSwitch")
+            noSwitch = false;
+    }
+
     //switching players
     private void SwitchPlayers()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab)&&!noSwitch)
         {
             if (spriteRenderer.sprite == sprite1) // if the spriteRenderer sprite = sprite1 then change to sprite2
             {
