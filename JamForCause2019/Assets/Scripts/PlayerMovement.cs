@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         jumpCancel = false;
         gravScale = rb.gravityScale;
         Debug.Log("Test");
+        lastCheckpoint = transform.position;
     }
 
     private void HandleMovement(float horizontal)
@@ -56,9 +57,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && !isGrounded)//player stops pressing the button
         {
             jumpCancel = true;
-            Debug.Log("Jump Cancel is true");
         }
-            
+        SwitchPlayers();
+        //respawning
+        if (dead)
+        {
+            transform.position = lastCheckpoint;
+            dead = false;
+        }
     }
 
     // Update is called once per frame
@@ -81,15 +87,8 @@ public class PlayerMovement : MonoBehaviour
             if (rb.velocity.y > smallJumpForce)
                 rb.gravityScale *= 3f;
             jumpCancel = false;
-            Debug.Log("Jump Cancel is false");
         }
         HandleMovement(horizontal);
-        SwitchPlayers();
-        if (dead)
-        {
-            transform.position = lastCheckpoint;
-            dead = false;
-        }
     }
     //checking collisions with different objects
     private void OnCollisionEnter2D(Collision2D col)
@@ -111,8 +110,11 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.tag == "Checkpoint")
         {
             lastCheckpoint = col.transform.position;//new respawn point
+            Destroy(col.gameObject);
         }
     }
+
+
 
     //switching players
     private void SwitchPlayers()
