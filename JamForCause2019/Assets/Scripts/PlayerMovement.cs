@@ -9,10 +9,21 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     public float jumpForce;
+    private SpriteRenderer spriteRenderer;
+
+    //setting up player switch
+    public Sprite sprite1;
+    public Sprite sprite2;
+    public bool isPlayer1;
+    public bool isPlayer2;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        isPlayer1 = true;
+        isPlayer2 = false;
     }
 
     private void HandleMovement(float horizontal)
@@ -22,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = true;
         else if(GetComponent<SpriteRenderer>().flipX == true && horizontal > 0)
             GetComponent<SpriteRenderer>().flipX = false;
+        //moving horizontally
         rb.velocity = new Vector2(horizontal*speed,rb.velocity.y);
     }
 
@@ -31,37 +43,42 @@ public class PlayerMovement : MonoBehaviour
         //moving horizontally
         float horizontal = Input.GetAxisRaw("Horizontal");
 
-        /*
-         * if up arrow pressed single frame
-         * 
-         * set y velocity to some high value
-         * 
-         * every frame, subtract .25 * deltatime from y velocity until it hits ground
-         */
-        /*
-        */
+        //checking if on ground to jump
         if(isGrounded==true&&Input.GetKeyDown(KeyCode.Space))
         {
             isGrounded = false;
             rb.AddForce(new Vector2(0, jumpForce));
         }
         HandleMovement(horizontal);
+        SwitchPlayers();
     }
-    /*
-    private bool IsGrounded()
-    {
-        if (rb.velocity.y <= 0)
-        {
-            return true;
-        }
-        else
-            return false;
-    }*/
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Ground") // GameObject is a type, gameObject is the property
         {
             isGrounded = true;
         }
+    }
+
+    //switching players
+    private void SwitchPlayers()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (spriteRenderer.sprite == sprite1) // if the spriteRenderer sprite = sprite1 then change to sprite2
+            {
+                spriteRenderer.sprite = sprite2;
+                isPlayer1 = false;
+                isPlayer2 = true;
+            }
+            else
+            {
+                spriteRenderer.sprite = sprite1; // otherwise change it back to sprite1
+                isPlayer2 = false;
+                isPlayer1 = true;
+            }
+        }
+
+
     }
 }
