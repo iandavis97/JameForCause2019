@@ -76,9 +76,9 @@ public class PlayerMovement : MonoBehaviour
     private void JumpInput()
     {
         //checking for jump input
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)//player starts pressing the buton
+        if ((Input.GetKeyDown(KeyCode.Space) && isGrounded)||((Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)))//player starts pressing the buton
             jump = true;
-        if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.UpArrow) && !isGrounded)//player stops pressing the button
+        if ((Input.GetKeyUp(KeyCode.Space)&& !isGrounded)|| (Input.GetKeyUp(KeyCode.UpArrow) && !isGrounded))//player stops pressing the button
         {
             jumpCancel = true;
         }
@@ -125,6 +125,18 @@ public class PlayerMovement : MonoBehaviour
             lastCheckpoint = col.transform.position;//new respawn point
             Destroy(col.gameObject);
         }
+    }
+
+    //checking triggers
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "NoSwitch")
+            noSwitch = true;
+    }
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "NoSwitch")
+            noSwitch = false;
     }
 
     //switching players

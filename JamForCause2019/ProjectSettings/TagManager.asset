@@ -9,6 +9,7 @@ TagManager:
   - Checkpoint
   - LightObject
   - DarkObject
+  - NoSwitch
   layers:
   - Default
   - TransparentFX
