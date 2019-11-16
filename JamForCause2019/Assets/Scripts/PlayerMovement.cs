@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         //checking if on ground
-        if (col.gameObject.tag == "Ground") // GameObject is a type, gameObject is the property
+        if (col.gameObject.layer == 8)//8 is ground
         {
             isGrounded = true;
             rb.gravityScale = gravScale;
