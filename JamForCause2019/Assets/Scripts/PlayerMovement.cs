@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public Sprite sprite2;
     public bool isPlayer1;
     public bool isPlayer2;
+    public bool noSwitch;//prevents switching
 
     // Start is called before the first frame update
     void Start()
@@ -129,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
     //switching players
     private void SwitchPlayers()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab)&&!noSwitch)
         {
             if (spriteRenderer.sprite == sprite1) // if the spriteRenderer sprite = sprite1 then change to sprite2
             {
