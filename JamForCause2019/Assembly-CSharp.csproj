@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/Profiles/icd9008/source/repos/JameForCause2019/JamForCause2019/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
