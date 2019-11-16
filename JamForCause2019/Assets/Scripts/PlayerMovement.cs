@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
+    //--PROPERTIES--
     public float speed;
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -37,28 +37,11 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Test");
         lastCheckpoint = transform.position;
     }
-
-    private void HandleMovement(float horizontal)
-    {
-        //flipping sprite
-        if (GetComponent<SpriteRenderer>().flipX == false && horizontal < 0)
-            GetComponent<SpriteRenderer>().flipX = true;
-        else if(GetComponent<SpriteRenderer>().flipX == true && horizontal > 0)
-            GetComponent<SpriteRenderer>().flipX = false;
-        //moving horizontally
-        rb.velocity = new Vector2(horizontal*speed,rb.velocity.y);
-    }
-
     void Update()
     {
-        //checking for jump input
-        if (Input.GetKeyDown(KeyCode.Space)&&isGrounded)//player starts pressing the buton
-            jump = true;
-        if (Input.GetKeyUp(KeyCode.Space) && !isGrounded)//player stops pressing the button
-        {
-            jumpCancel = true;
-        }
+        JumpInput();
         SwitchPlayers();
+
         //respawning
         if (dead)
         {
@@ -73,23 +56,51 @@ public class PlayerMovement : MonoBehaviour
         //moving horizontally
         float horizontal = Input.GetAxisRaw("Horizontal");
 
+        HandleMovement(horizontal);
+        HandleJump();
+    }
+
+    //--METHODS--
+    private void HandleMovement(float horizontal)
+    {
+        //flipping sprite
+        if (GetComponent<SpriteRenderer>().flipX == false && horizontal < 0)
+            GetComponent<SpriteRenderer>().flipX = true;
+        else if(GetComponent<SpriteRenderer>().flipX == true && horizontal > 0)
+            GetComponent<SpriteRenderer>().flipX = false;
+        //moving horizontally
+        rb.velocity = new Vector2(horizontal*speed,rb.velocity.y);
+    }
+    private void JumpInput()
+    {
+        //checking for jump input
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)//player starts pressing the buton
+            jump = true;
+        if (Input.GetKeyUp(KeyCode.Space) && !isGrounded)//player stops pressing the button
+        {
+            jumpCancel = true;
+        }
+    }
+    private void HandleJump()
+    {
         //checking if player is trying to jump (Normal jump)
-        if(jump)
+        if (jump)
         {
             rb.AddForce(new Vector2(0, jumpForce));
             jump = false;
             isGrounded = false;
         }
-        
+
         //cancel the jump when button no longer pressed
-        if(jumpCancel)
+        if (jumpCancel)
         {
             if (rb.velocity.y > smallJumpForce)
                 rb.gravityScale *= 3f;
             jumpCancel = false;
         }
-        HandleMovement(horizontal);
     }
+
+    
     //checking collisions with different objects
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -113,8 +124,6 @@ public class PlayerMovement : MonoBehaviour
             Destroy(col.gameObject);
         }
     }
-
-
 
     //switching players
     private void SwitchPlayers()
