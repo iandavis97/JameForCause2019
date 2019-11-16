@@ -17,6 +17,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement(float horizontal)
     {
+        //flipping sprite
+        if (GetComponent<SpriteRenderer>().flipX == false && horizontal < 0)
+            GetComponent<SpriteRenderer>().flipX = true;
+        else if(GetComponent<SpriteRenderer>().flipX == true && horizontal > 0)
+            GetComponent<SpriteRenderer>().flipX = false;
         rb.velocity = new Vector2(horizontal*speed,rb.velocity.y);
     }
 
