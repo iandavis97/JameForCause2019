@@ -17,6 +17,12 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 lastCheckpoint;//if player dies, should respwan at last activated checkpoint
     private float gravScale;
 
+    //audio variables
+    public AudioSource audSource;
+    private AudioClip dieSfx;
+    private AudioClip jumpSfx;
+    private AudioClip switchSfx;
+
     //setting up player switch
     public Sprite sprite1;
     public Sprite sprite2;
@@ -38,6 +44,12 @@ public class PlayerMovement : MonoBehaviour
         gravScale = rb.gravityScale;
         Debug.Log("Test");
         lastCheckpoint = transform.position;
+
+        //loading in audio
+        audSource = GetComponent<AudioSource>();
+        dieSfx = Resources.Load("die sfx") as AudioClip;
+        jumpSfx= Resources.Load("jump sfx") as AudioClip;
+        switchSfx=Resources.Load("die sfx") as AudioClip;
     }
     void Update()
     {
@@ -49,6 +61,9 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = lastCheckpoint;
             rb.velocity = Vector3.zero;
+            //play dying sfx if nothing else playing
+            if (!audSource.isPlaying)
+                audSource.PlayOneShot(dieSfx);
             dead = false;
         }
     }
@@ -89,6 +104,9 @@ public class PlayerMovement : MonoBehaviour
         //checking if player is trying to jump (Normal jump)
         if (jump)
         {
+            //play jump sfx
+            if (!audSource.isPlaying)
+                audSource.PlayOneShot(jumpSfx);
             rb.AddForce(new Vector2(0, jumpForce));
             jump = false;
             isGrounded = false;
@@ -146,6 +164,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab)&&!noSwitch)
         {
             ActuallySwitch();
+            //play switch sfx
+            if (!audSource.isPlaying)
+                audSource.PlayOneShot(switchSfx);
         }
     }
 
