@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //checking if colliding with enemy
-        if(col.gameObject.tag=="Enemy")
+        if(col.gameObject.layer==10)//10 is Enemy
         {
             dead = true;
         }
