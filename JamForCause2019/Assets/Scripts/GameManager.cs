@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject gj = GameObject.Find("level_light");
+        int indexcount = gj.transform.childCount;
+        for(int i = 0; i < indexcount; i++)
+        {
+            objectSwapList.Add(gj.transform.GetChild(i).gameObject);
+        }
         player = playerObject.GetComponent<PlayerMovement>();
     }
 

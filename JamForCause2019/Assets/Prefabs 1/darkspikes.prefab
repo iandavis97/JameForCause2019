@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6702303018810206174}
   - component: {fileID: 4039729587434508893}
   - component: {fileID: 4613740216366553217}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: darkspikes
   m_TagString: DarkObject
   m_Icon: {fileID: 0}

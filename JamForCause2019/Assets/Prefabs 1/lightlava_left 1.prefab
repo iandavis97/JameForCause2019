@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5816723733135384275}
   - component: {fileID: 5816723733135384272}
   - component: {fileID: 5816723733135384273}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: lightlava_left 1
   m_TagString: LightObject
   m_Icon: {fileID: 0}
